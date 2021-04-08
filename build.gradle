@@ -41,5 +41,13 @@ test {
 
 asciidoctor {
 	inputs.dir snippetsDir
+	attributes 'snippets': snippetsDir
 	dependsOn test
+}
+
+bootJar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/docs'
+	}
 }
