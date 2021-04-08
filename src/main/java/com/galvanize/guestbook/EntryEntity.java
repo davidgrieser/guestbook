@@ -20,5 +20,7 @@ public class EntryEntity {
     String name;
     String comment;
     public EntryEntity(String name, String comment) {
+        this.name = name;
+        this.comment = comment;
     }
 }
