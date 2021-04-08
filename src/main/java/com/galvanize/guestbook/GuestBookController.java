@@ -16,9 +16,9 @@ public class GuestBookController {
     }
 
     @GetMapping("/")
+    @ResponseStatus(HttpStatus.FOUND)
     public void redirectToDocs(HttpServletResponse httpServletResponse){
         httpServletResponse.setHeader("Location", "/docs/index.html");
-        httpServletResponse.setStatus(302);
     }
 
     @GetMapping("entries")
