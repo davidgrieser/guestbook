@@ -19,4 +19,4 @@ ENV SRC_HOME=/app
 WORKDIR /app
 # Copy .jar file (aka, builder)
 COPY --from=builder $SRC_HOME/build/libs/*.jar app.jar
-ENTRYPOINT [ "sh", "-c", "java -Xmx300m -Xss512k -Dserver.port=$PORT -jar /app/app.jar" ]
+ENTRYPOINT [ "java -Xmx300m -Xss512k -Dserver.port=$PORT -jar /app/app.jar" ]
