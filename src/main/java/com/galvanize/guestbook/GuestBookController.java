@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GuestBookController {
 
-    @GetMapping("entry")
+    @GetMapping("entries")
     public String getEntries() {
         return "[]";
     }
