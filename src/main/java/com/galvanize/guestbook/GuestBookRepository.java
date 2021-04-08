@@ -1,4 +1,6 @@
 package com.galvanize.guestbook;
 
-public class GuestBookRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GuestBookRepository extends JpaRepository {
 }
