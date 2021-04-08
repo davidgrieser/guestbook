@@ -14,7 +14,7 @@ public class GuestBookController {
 
     @GetMapping("entries")
     public String getEntries() {
-        return "[]";
+        return guestBookService.getEntries();
     }
 
     @PostMapping("entries")
