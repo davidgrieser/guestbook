@@ -2,6 +2,7 @@ package com.galvanize.guestbook;
 
 import org.springframework.stereotype.Service;
 
+@Service
 public class GuestBookService {
     GuestBookRepository guestBookRepository;
 

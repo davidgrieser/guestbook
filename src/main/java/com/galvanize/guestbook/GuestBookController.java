@@ -8,7 +8,7 @@ public class GuestBookController {
 
     GuestBookService guestBookService;
 
-    GuestBookController(GuestBookService guestBookService) {
+    public GuestBookController(GuestBookService guestBookService) {
         this.guestBookService = guestBookService;
     }
 
