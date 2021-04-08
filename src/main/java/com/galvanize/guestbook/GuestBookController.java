@@ -3,6 +3,8 @@ package com.galvanize.guestbook;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class GuestBookController {
 
@@ -13,8 +15,8 @@ public class GuestBookController {
     }
 
     @GetMapping("entries")
-    public String getEntries() {
-        return guestBookService.getEntries().toString();
+    public List<EntryDto> getEntries() {
+        return guestBookService.getEntries();
     }
 
     @PostMapping("entries")
