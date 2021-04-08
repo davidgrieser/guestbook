@@ -7,7 +7,7 @@ Guestbook Service is a service that allows guests to leave some comments
 ### Build
 
 ```
-docker build -t guestbook:dev .
+docker build -t guestbook:dev -f Dockerfile.local .
 ```
 
 ### Setup
