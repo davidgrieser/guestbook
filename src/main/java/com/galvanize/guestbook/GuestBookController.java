@@ -13,7 +13,7 @@ public class GuestBookController {
 
     @PostMapping("entries")
     @ResponseStatus(HttpStatus.CREATED)
-    public String postEntries(@RequestBody String entry) {
+    public EntryDto postEntries(@RequestBody EntryDto entry) {
         return entry;
     }
 
