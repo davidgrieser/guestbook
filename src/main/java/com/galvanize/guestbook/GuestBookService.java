@@ -3,7 +3,13 @@ package com.galvanize.guestbook;
 import org.springframework.stereotype.Service;
 
 public class GuestBookService {
-    public void saveEntry(EntryDto entryDto) {
+    GuestBookRepository guestBookRepository;
 
+    public GuestBookService(GuestBookRepository guestBookRepository) {
+        this.guestBookRepository = guestBookRepository;
+    }
+
+    public void saveEntry(EntryDto entryDto) {
+        guestBookRepository.save(new EntryEntity(entryDto.getName(), entryDto.getComment()));
     }
 }
