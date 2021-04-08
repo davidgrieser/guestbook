@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -11,6 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -18,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
 @Transactional
 public class GuestBookIT {
 
@@ -31,7 +36,8 @@ public class GuestBookIT {
     void getZeroEntries() throws Exception {
         mockMvc.perform(get("/entries"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("length()").value(0));
+                .andExpect(jsonPath("length()").value(0))
+                .andDo(document("Get-Entries-Empty"));
     }
 
     @Test
@@ -43,7 +49,11 @@ public class GuestBookIT {
                 .content(objectMapper.writeValueAsString(entryDto)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("name").value("David"))
-                .andExpect(jsonPath("comment").value("Making sure this works"));
+                .andExpect(jsonPath("comment").value("Making sure this works"))
+                .andDo(document("Post-Entries", responseFields(
+                        fieldWithPath("name").description("Name of person who left comment"),
+                        fieldWithPath("comment").description("Comment left by person")
+                )));
     }
 
     @Test
@@ -67,6 +77,10 @@ public class GuestBookIT {
                 .andExpect(jsonPath("length()").value(2))
                 .andExpect(jsonPath("[0].name").value("David"))
                 .andExpect(jsonPath("[0].comment").value("Making sure this works"))
-                .andExpect(jsonPath("[1].name").value("Wes"));
+                .andExpect(jsonPath("[1].name").value("Wes"))
+                .andDo(document("Get-Entries", responseFields(
+                        fieldWithPath("[0].name").description("Name of person who left comment"),
+                        fieldWithPath("[0].comment").description("Comment left by person")
+                )));
     }
 }
