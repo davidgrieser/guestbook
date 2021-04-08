@@ -47,6 +47,5 @@ public class GuestBookServiceTests {
                          new EntryDto("GetName2", "GetComment2")
                 )
         );
-
     }
 }
